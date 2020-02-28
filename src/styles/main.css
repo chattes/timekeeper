@@ -1,0 +1,17 @@
+body {
+  background-color: #1f282e;
+  color: white;
+	height: 100vh;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	
+}
+
+.parent-div {
+	width: 100%;
+	height: 100%;
+}
