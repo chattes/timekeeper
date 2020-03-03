@@ -20,8 +20,8 @@ function createWindow() {
   // Create the browser window.
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   window = new BrowserWindow({
-    width: 0.5 * width,
-    height: 0.4 * height,
+    width: 0.3 * width,
+    height: 0.1 * height,
     frame: false,
     transparent: true,
 
@@ -44,7 +44,7 @@ function createWindow() {
   window.setPosition(position.x, position.y, false);
 
   // Open the DevTools.
-  window.webContents.openDevTools();
+  // window.webContents.openDevTools();
 }
 
 const createTray = () => {
