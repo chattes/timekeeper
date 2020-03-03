@@ -99,3 +99,15 @@ body {
 	outline: none;
 }
 
+.timer-container {
+	margin-top: 20px
+}
+
+.clock-timer {
+	font-size: 40px;
+	color: darkgrey
+}
+
+
+
+

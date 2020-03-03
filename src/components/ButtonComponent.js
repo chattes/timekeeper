@@ -1,5 +1,9 @@
 "use strict";
+
 import "./ButtonComponent.css";
+import { TimerComponent } from "./timer/TimerComponent";
+
+const { create_timer, render_timer } = TimerComponent();
 export const ProjectComponent = () => {
   let state = {
     project_name: "My Awesome Project",
@@ -18,7 +22,6 @@ export const ProjectComponent = () => {
 
   const setState = current_state => {
     state = Object.freeze({ ...state, ...current_state });
-    console.log("State:::", state);
   };
 
   const create_input = ({ label, action, placeholder }) => {
@@ -77,12 +80,18 @@ export const ProjectComponent = () => {
     if (state.timer_started) {
       clearInterval(state.timer_interval_id);
       setState({ timer_interval_id: null, timer_started: false, timer: 0 });
+      setTimeout(() => {
+        render_timer({ time: state.timer });
+      }, 0);
+
       document.getElementById("start-button").innerHTML = "Start";
     } else {
       let timer_interval_id = setInterval(() => {
         // setState({ timer: state.timer + 1 });
         setState({ timer: state.timer + 1 });
-        console.log("Time Elapsed", state.timer);
+        setTimeout(() => {
+          render_timer({ time: state.timer });
+        }, 0);
       }, 1000);
 
       setState({
@@ -131,6 +140,12 @@ export const ProjectComponent = () => {
         className: "button-blue"
       })
     );
+
+    let timerContainer = document.createElement("section");
+    timerContainer.className = "timer-container";
+
+    timerContainer.appendChild(create_timer(0));
+    root_container.appendChild(timerContainer);
 
     return root_container;
   };
