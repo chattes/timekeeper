@@ -5,7 +5,8 @@ const {
   Tray,
   Menu,
   nativeImage,
-  screen
+  screen,
+  Notification
 } = require("electron");
 const path = require("path");
 const WindowPosition = require("electron-window-position");
@@ -43,7 +44,7 @@ function createWindow() {
   window.setPosition(position.x, position.y, false);
 
   // Open the DevTools.
-  // window.webContents.openDevTools();
+  window.webContents.openDevTools();
 }
 
 const createTray = () => {
@@ -85,6 +86,7 @@ const getWindowPosition = () => {
 app.whenReady().then(() => {
   createTray();
   createWindow();
+  handleEvents();
 });
 
 // Quit when all windows are closed.
@@ -106,3 +108,14 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+const handleEvents = () => {
+  ipcMain.on("friendly-reminder", (event, arg) => {
+    let timerNotification = new Notification({
+      title: "Time Keeper",
+      subtitle: "Just Checking...",
+      body: `Still working on Task ${arg.task_name} ?`
+    });
+    setTimeout(() => timerNotification.show(), 2000);
+  });
+};

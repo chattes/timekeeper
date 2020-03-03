@@ -49,6 +49,7 @@ body {
 	background-color:#1f282e;
 	caret-color: white;
 	color:white;
+	font-size: 20px;
 }
 
 .time-input:focus {

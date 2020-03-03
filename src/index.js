@@ -1,6 +1,8 @@
 import "./styles/main.css";
 import { ProjectComponent } from "./components/ButtonComponent";
 
+const { ipcRenderer } = window.require("electron");
+
 const rootEl = document.querySelector("#wrapper");
 
 const renderContainer = () => {

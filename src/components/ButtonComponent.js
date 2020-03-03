@@ -3,6 +3,8 @@
 import "./ButtonComponent.css";
 import { TimerComponent } from "./timer/TimerComponent";
 
+const { ipcRenderer } = window.require("electron");
+
 const { create_timer, render_timer } = TimerComponent();
 export const ProjectComponent = () => {
   let state = {
@@ -89,6 +91,11 @@ export const ProjectComponent = () => {
       let timer_interval_id = setInterval(() => {
         // setState({ timer: state.timer + 1 });
         setState({ timer: state.timer + 1 });
+        if (state.timer === 30) {
+          ipcRenderer.send("friendly-reminder", {
+            task_name: state.task_name
+          });
+        }
         setTimeout(() => {
           render_timer({ time: state.timer });
         }, 0);
